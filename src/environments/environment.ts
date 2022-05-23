@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl:"http://localhost:8080/api/",
-
+  xyz:"http://localhost:8080/api/",
   encryptSecretKey:"247whdskjnbakjaa2buewqikna!~@#keklkfdlmscmxnnz,m"
 };
 
