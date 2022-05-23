@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <div class="card" style="padding:5px;margin-top:50px;">
+        <h3  class="text-center" class="fw-bold">Creat your account</h3>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name </label>
+            <input type="text" class="form-control" placeholder="Enter your name" formControlName="username"
+              [ngClass]="{ 'is-invalid': submitted && fvalue.username.errors }">
+            <div *ngIf="submitted && fvalue.username.errors" class="invalid-feedback">
+              <div *ngIf="fvalue.username.errors.required">Username is required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="Email1" class="form-label">Email </label>
+            <input type="email" class="form-control" placeholder="Enter your email" formControlName="email"
+              [ngClass]="{ 'is-invalid': submitted && fvalue.email.errors }">
+            <div *ngIf="submitted && fvalue.email.errors" class="invalid-feedback">
+              <div *ngIf="fvalue.email.errors.required">Email is required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="mobileno" class="form-label">Mobille No </label>
+            <input type="number" class="form-control" placeholder="Enter your Mobile no" formControlName="mobileNo"
+              [ngClass]="{ 'is-invalid': submitted && fvalue.mobileNo.errors }">
+            <div *ngIf="submitted && fvalue.mobileNo.errors" class="invalid-feedback">
+              <div *ngIf="fvalue.mobileNo.errors.required">MobileNo is required</div>
+              <div *ngIf="fvalue.mobileNo.errors.required">MobileNo is maxLength 10</div>
+              <div *ngIf="fvalue.mobileNo.errors.required">MobileNo is minLength 10</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">password </label>
+            <input type="password" class="form-control" placeholder="Enter your password" formControlName="password"
+              [ngClass]="{ 'is-invalid': submitted && fvalue.password.errors }">
+            <div *ngIf="submitted && fvalue.password.errors" class="invalid-feedback">
+              <div *ngIf="fvalue.password.errors.required">Password is required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dob">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div *ngIf="submitted && fvalue.dob.errors?.required" style="color:#dc3545;">DOB is required</div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender"
+              formControlName="gender"  value="Female">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Female
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" 
+              formControlName="gender" value="Male">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Male
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" 
+              formControlName="gender" value="Other">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Other
+            </label>
+          </div>
+          <div *ngIf="submitted && fvalue.gender.errors?.required" style="color:#dc3545 ;">Gender is required</div>
+          <hr>
+          <div class="form-group form-check">
+            <input type="checkbox" formControlName="acceptTerms" class="form-check-input"
+              [ngClass]="{ 'is-invalid': submitted && fvalue.acceptTerms?.errors }" />
+            <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+            <div *ngIf="submitted && fvalue.acceptTerms?.errors" style="color:#dc3545 ;">Accept Ts & Cs is required</div>
+          </div>
+           <hr>
+          <div>
+            <button type="submit" class="btn btn-success btn-sm">sign-up</button>
+            <button type="button" class="btn btn-primary btn-sm" style="float:right"
+              routerLink="/auth/login">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div>
+<!-- success modal after sign-up -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" style="margin: 0px;color: #1cb29e;">
+        Confirmation</h4>
+        <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+      </div>
+      <div class="modal-body">
+       <div style="color: green;
+       text-align: center;
+       margin-bottom: 10px;">
+   Your Account has been created</div> 
+        <button type="button" class="btn btn-success btn-sm" (click)="navigateToLogin()">Click hear to login </button>
+        <button type="button" class="btn btn-info btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')" style="float:right" >Click hear to Close </button>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+      </div> -->
+    </ng-template>

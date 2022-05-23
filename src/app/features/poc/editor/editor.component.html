@@ -1,0 +1,15 @@
+<p>editor works!</p>
+<div class="NgxEditor__Wrapper">
+    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+    <ngx-editor
+      [editor]="editor"
+      [(ngModel)]="html"
+      [disabled]="false"
+      [placeholder]="'Type here...'"
+      [style]="{height: '250px'}"
+    ></ngx-editor>
+  </div>
+  <div>
+      <button type="button" (click)="getData()">Get Data</button>
+  </div>
+  <div [innerHTML]="content"></div>

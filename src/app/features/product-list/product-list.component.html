@@ -1,0 +1,82 @@
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Home</li>
+    <li class="breadcrumb-item active" aria-current="page">Product List</li>
+  </ol>
+</nav>
+<!-- {{allProdectList |json}} -->
+<button type="button" class="btn btn-primary" routerLink="add-edite-product">Add</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Sno</th>
+        <th scope="col">Product_name</th>
+        <th scope="col">Product_description</th>
+        <th scope="col">Product_image</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let item of allProdectList;let i=index;">
+        <td>{{i+1}}</td>
+        <td>{{item.product_name }}</td>
+        <td>{{item.product_description}}</td>
+        <td>{{item.product_image}}</td>
+        <td [ngClass]="{'my-pending':item.product_status=='pending','my-approved':item.product_status=='approved','my-rejected':item.product_status=='rejected'}">{{item.product_status |titlecase}}</td>
+        <td><button mat-icon-button color="primary" (click)="editProduct(item._id)" >
+          <mat-icon >edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" id="remove" (click)="deleteProductList(item._id)" >
+          <mat-icon >delete</mat-icon>
+        </button>
+            <button type="button" class="btn btn-info btn-sm" (click)="viewProduct(item._id,item)">View</button></td>
+      </tr>
+      <ng-container *ngIf="allProdectList?.length == 0">
+        <tr>
+          <td colspan="5">
+            No Record Found
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Product Details</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+     <!-- {{productSingaleDetails |json}} -->
+     <table class="table">
+     <thead>
+      <tr>
+        <th scope="col">Sno</th>
+        <td>{{productSingaleDetails?._id}}</td>
+      </tr>
+      <tr>
+        <th scope="col">Product_name</th>
+        <td>{{productSingaleDetails?.product_name }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Product_description</th>
+        <td>{{productSingaleDetails?.product_description}}</td>
+      </tr>
+      <tr>
+        <th scope="col">Product_image</th>
+        <td>{{productSingaleDetails?.product_image}}</td>
+      </tr>
+      <tr>
+        <th scope="col">Status</th>
+        <td>{{productSingaleDetails?.product_status}}</td>
+      </tr>
+    </thead>
+
+    </table>
+    </div>
+   
+  </ng-template>
+  
+

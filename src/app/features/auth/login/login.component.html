@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <div class="card" style="padding:5px;margin-top:50px;">
+                <h3 class="text-center" class="fw-bold">Login Form</h3>
+                <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+                    <div class="mb-3">
+                        <label for="Email1" class="form-label">Email </label>
+                        <input type="email" class="form-control" placeholder="Enter your email" formControlName="email"
+                            [ngClass]="{ 'is-invalid': submitted && fvalue.email.errors }">
+                        <div *ngIf="submitted && fvalue.email.errors" class="invalid-feedback">
+                            <div *ngIf="fvalue.email.errors.required">Email is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">password </label>
+                        <input type="password" class="form-control" placeholder="Enter your password"
+                            formControlName="password"
+                            [ngClass]="{ 'is-invalid': submitted && fvalue.password.errors }">
+                        <div *ngIf="submitted && fvalue.password.errors" class="invalid-feedback">
+                            <div *ngIf="fvalue.password.errors.required">Password is required</div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">login</button>
+                    <button type="button" class="btn btn-success btn-sm" style="float:right" routerLink="/auth/sign-up">Sign up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div>

@@ -1,0 +1,25 @@
+<p>google-map works!</p>
+{{markers| json}}
+<ng-container *ngIf="markers.length > 0">
+    <agm-map 
+    [latitude]="lat" 
+    [longitude]="lng" 
+    [zoom]="mapZoom" 
+    [disableDefaultUI]="false" 
+    [zoomControl]="false"
+    (mapClick)="mapClicked($event)">
+        
+        
+        <agm-marker *ngFor="let item of markers; let i = index"
+        [latitude]="item.lat" 
+        [longitude]="item.lng"
+        [label]="item.label"
+        [markerDraggable]="false"
+        (markerClick)="clickedMarker(item, i)"
+        >
+            <agm-info-window [isOpen]="showContentIndex == i">
+                <strong>InfoWindow content {{item.lat}}  {{item.lng}}</strong>
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
+</ng-container>
