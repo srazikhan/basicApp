@@ -16,6 +16,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 
+
 const toBeExported = [
   FormsModule,
   ReactiveFormsModule,
@@ -32,7 +33,7 @@ const AMList = [
   MatDialogModule,
   MatTableModule,
   MatPaginatorModule,
-  MatIconModule
+  MatIconModule,
 ]
 const ngBootstrap = [
   NgbPaginationModule,

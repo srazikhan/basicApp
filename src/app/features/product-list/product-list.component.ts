@@ -1,11 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmDialogComponent } from 'src/app/components/dialog/confirm-dialog/confirm-dialog.component';
 import { EncryptDecryptService } from 'src/app/services/encrypt-decrypt.service';
 import { ProductListService } from 'src/app/services/product-list.service';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-product-list',
@@ -13,6 +15,9 @@ import { ProductListService } from 'src/app/services/product-list.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
+  displayedColumns: string[] = ["sno",'product_name', 'product_description', 'product_image', 'product_status',"action"];
+  dataSource!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild("content",{static:true}) content!:ElementRef;
   allProdectList: any;
   productSingaleDetails:any;
@@ -31,6 +36,8 @@ export class ProductListComponent implements OnInit {
     this.productListService.productList().subscribe((res: any) => {
       // console.log(res);
       this.allProdectList = res.data;
+      this.dataSource = new MatTableDataSource( res.data);
+      this.dataSource.paginator = this.paginator;
     })
   }
   editProduct(id: any) {
